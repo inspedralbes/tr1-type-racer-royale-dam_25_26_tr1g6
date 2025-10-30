@@ -1,3 +1,5 @@
+https://deepwiki.com/inspedralbes/tr1-type-racer-royale-dam_25_26_tr1g6
+
 # transversals
 Esquema mínim de carpetes pels projectes transversals
 
