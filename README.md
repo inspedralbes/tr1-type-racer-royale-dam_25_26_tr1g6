@@ -34,5 +34,5 @@ inspedralbes/tr1-type-racer-royale-dam_25_26_tr1g6/
  * Petita descripció: Una aplicació feta per donar suport a les persones que volen fer exercici, ja sigui en grup o en solitari
  * Adreça del gestor de tasques: https://tree.taiga.io/project/javaguper-dam_25_26_tr1g6/backlog
  * Adreça del prototip gràfic del projecte: 
- * URL de producció (quan la tingueu)
+ * URL de producció:
  * Estat: Etapa inicial: Planificant tot alló de la aplicació i de moment una versió basica instaurada
