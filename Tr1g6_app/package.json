@@ -10,9 +10,11 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.11.3",
     "@fontsource/roboto": "5.2.6",
     "@mdi/font": "^7.4.47",
     "@vuepic/vue-datepicker": "^11.0.3",
+    "generative-ai": "^0.1.4",
     "vue": "^3.5.17",
     "vuetify": "^3.10.8"
   },
