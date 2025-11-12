@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "name": "Squat",
+    "description": "A lower body exercise where you bend your knees and lower your body",
+    "targetMuscles": [
+      "Quadriceps",
+      "Hamstrings",
+      "Glutes"
+    ],
+    "difficulty": "Beginner",
+    "instructions": "Stand with feet shoulder-width apart. Lower your body by bending your knees until your thighs are parallel to the ground. Push back up to the starting position."
+  },
+  {
+    "id": 2,
+    "name": "Push-up",
+    "description": "An upper body exercise using your own body weight",
+    "targetMuscles": [
+      "Chest",
+      "Shoulders",
+      "Triceps"
+    ],
+    "difficulty": "Beginner",
+    "instructions": "Start in a plank position with hands shoulder-width apart. Lower your body until your chest nearly touches the ground. Push back up to the starting position."
+  },
+  {
+    "id": 3,
+    "name": "Lunge",
+    "description": "A lower body exercise that targets one leg at a time",
+    "targetMuscles": [
+      "Quadriceps",
+      "Glutes",
+      "Hamstrings"
+    ],
+    "difficulty": "Beginner",
+    "instructions": "Step forward with one leg and lower your body until both knees are bent at a 90-degree angle. Push back to the starting position and repeat with the other leg."
+  },
+  {
+    "id": 6,
+    "name": "Jumping Jack",
+    "description": "A cardio exercise where you jump while spreading your legs and raising your arms",
+    "targetMuscles": [
+      "Full Body",
+      "Cardio"
+    ],
+    "difficulty": "Beginner",
+    "instructions": "Stand with feet together and arms at your sides. Jump while spreading your feet shoulder-width apart and raising your arms above your head. Jump back to the starting position with feet together and arms at your sides."
+  },
+  {
+    "id": 8,
+    "name": "Bicep Curl",
+    "description": "An isolation exercise for strengthening the biceps using arm flexion.",
+    "targetMuscles": [
+      "Biceps"
+    ],
+    "difficulty": "Beginner",
+    "instructions": "Stand with arms extended, bend your elbows to lift your hands towards your shoulders, then return slowly."
+  },
+  {
+    "id": 9,
+    "name": "Shoulder Press",
+    "description": "An overhead pressing movement to strengthen shoulders and triceps.",
+    "targetMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "difficulty": "Intermediate",
+    "instructions": "Start with hands near shoulders, then press upward until arms are straight above your head. Lower back down slowly."
+  },
+  {
+    "id": 10,
+    "name": "Sit-up",
+    "description": "A core exercise that involves lifting your torso from a lying position.",
+    "targetMuscles": [
+      "Abdominals",
+      "Hip Flexors"
+    ],
+    "difficulty": "Beginner",
+    "instructions": "Lie on your back, knees bent, and feet flat. Lift your torso toward your knees, then return slowly."
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "user_1762766172539",
+    "email": "test@example.com",
+    "fullName": "Test User",
+    "provider": "google",
+    "createdAt": "2025-11-10T09:16:12.539Z",
+    "lastLogin": "2025-11-10T09:16:12.539Z"
+  },
+  {
+    "id": "user_1762767790718",
+    "email": "pariskar5@gmail.com",
+    "fullName": "Pariskar",
+    "provider": "google",
+    "createdAt": "2025-11-10T09:43:10.718Z",
+    "lastLogin": "2025-11-10T09:44:27.359Z"
+  },
+  {
+    "id": "user_1762768548527",
+    "email": "DFJNV@GADC.COM",
+    "fullName": "PARISKAR",
+    "provider": "google",
+    "createdAt": "2025-11-10T09:55:48.527Z",
+    "lastLogin": "2025-11-10T10:44:40.559Z"
+  },
+  {
+    "id": "user_1762935568976",
+    "email": "pariskar@fhak.com",
+    "fullName": "Pariskar RIjal",
+    "provider": "google",
+    "createdAt": "2025-11-12T08:19:28.976Z",
+    "lastLogin": "2025-11-12T08:19:28.976Z"
+  },
+  {
+    "id": "user_1762935628955",
+    "email": "pariskarr3@gmail.com",
+    "fullName": "dc",
+    "provider": "google",
+    "createdAt": "2025-11-12T08:20:28.955Z",
+    "lastLogin": "2025-11-12T08:20:28.955Z"
+  },
+  {
+    "id": "user_1762941170273",
+    "email": "pariskar@gmail.com",
+    "fullName": "harsh",
+    "provider": "google",
+    "createdAt": "2025-11-12T09:52:50.273Z",
+    "lastLogin": "2025-11-12T09:52:50.273Z"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "sessionId": "session_ucy72ts41",
+    "exercise": "Squat",
+    "createdAt": "2025-11-12T08:20:01.219Z",
+    "endedAt": "2025-11-12T08:22:07.351Z",
+    "participants": [
+      {
+        "id": "user_0z3vnsv7i",
+        "name": "pariskart",
+        "reps": 0
+      },
+      {
+        "id": "user_2niyxxyu0",
+        "name": "dc",
+        "reps": 10
+      }
+    ]
+  }
+]
