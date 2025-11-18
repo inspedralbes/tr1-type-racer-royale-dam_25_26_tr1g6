@@ -16,9 +16,23 @@
             <p class="text-subtitle1 text-on-surface">Virtual Training Platform</p>
           </div>
 
-          <!-- Login Form -->
+          <!-- Login/Register Form -->
           <v-card-text>
-            <v-form @submit.prevent="handleGoogleLogin">
+            <v-form @submit.prevent="isLogin ? handleLogin() : handleRegister()">
+              <h2 class="text-h5 text-center mb-6 text-on-surface">{{ isLogin ? 'Login' : 'Create Account' }}</h2>
+
+              <!-- Full Name Input (Only for Register) -->
+              <v-text-field
+                v-if="!isLogin"
+                v-model="fullName"
+                label="Full Name"
+                variant="outlined"
+                prepend-inner-icon="mdi-account"
+                class="mb-4"
+                :rules="nameRules"
+                required
+              ></v-text-field>
+
               <!-- Email Input -->
               <v-text-field
                 v-model="email"
@@ -31,43 +45,56 @@
                 required
               ></v-text-field>
 
-              <!-- Name Input -->
+              <!-- Password Input -->
               <v-text-field
-                v-model="fullName"
-                label="Full Name"
+                v-model="password"
+                label="Password"
+                :type="showPassword ? 'text' : 'password'"
                 variant="outlined"
-                prepend-inner-icon="mdi-account"
+                prepend-inner-icon="mdi-lock"
+                :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append-inner="showPassword = !showPassword"
                 class="mb-6"
-                :rules="nameRules"
+                :rules="passwordRules"
                 required
               ></v-text-field>
 
-              <!-- Google Login Button -->
+              <!-- Submit Button -->
               <v-btn
                 color="primary"
                 block
                 size="large"
-                @click="handleGoogleLogin"
+                type="submit"
                 rounded="lg"
                 class="mb-4"
-                :disabled="!email || !fullName"
+                :disabled="!isFormValid || isLoading"
               >
-                <v-icon start>mdi-google</v-icon>
-                Sign in with Google
+                <v-icon start>{{ isLogin ? 'mdi-login' : 'mdi-account-plus' }}</v-icon>
+                {{ isLogin ? 'Login' : 'Register' }}
+              </v-btn>
+
+              <!-- Switch to Login/Register -->
+              <v-btn
+                variant="text"
+                block
+                @click="isLogin = !isLogin"
+                :disabled="isLoading"
+              >
+                {{ isLogin ? 'Need an account? Register' : 'Already have an account? Login' }}
               </v-btn>
 
               <!-- Error Message -->
-              <v-alert v-if="errorMessage" type="error" variant="tonal" class="mb-4">
+              <v-alert v-if="errorMessage" type="error" variant="tonal" class="mt-4">
                 {{ errorMessage }}
               </v-alert>
 
               <!-- Success Message -->
-              <v-alert v-if="successMessage" type="success" variant="tonal" class="mb-4">
+              <v-alert v-if="successMessage" type="success" variant="tonal" class="mt-4">
                 {{ successMessage }}
               </v-alert>
 
               <!-- Loading State -->
-              <v-progress-linear v-if="isLoading" indeterminate color="primary"></v-progress-linear>
+              <v-progress-linear v-if="isLoading" indeterminate color="primary" class="mt-4"></v-progress-linear>
             </v-form>
 
             <!-- Divider -->
@@ -85,11 +112,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-// Form data
+// State
+const isLogin = ref(true)
 const email = ref('')
+const password = ref('')
 const fullName = ref('')
+const showPassword = ref(false)
 const isLoading = ref(false)
 const errorMessage = ref('')
 const successMessage = ref('')
@@ -100,68 +130,103 @@ const emailRules = [
   v => /.+@.+\..+/.test(v) || 'Email must be valid'
 ]
 
+const passwordRules = [
+  v => !!v || 'Password is required',
+  v => v.length >= 6 || 'Password must be at least 6 characters'
+]
+
 const nameRules = [
   v => !!v || 'Name is required',
   v => v.length >= 2 || 'Name must be at least 2 characters'
 ]
 
-// Handle Google Login
-async function handleGoogleLogin() {
-  // Reset messages
+// Computed property for form validation
+const isFormValid = computed(() => {
+  const baseValid = email.value && password.value && emailRules.every(rule => rule(email.value) === true) && passwordRules.every(rule => rule(password.value) === true)
+  if (isLogin.value) {
+    return baseValid
+  } else {
+    return baseValid && fullName.value && nameRules.every(rule => rule(fullName.value) === true)
+  }
+})
+
+// Utility function to handle API calls
+async function authCall(endpoint, body) {
+  const response = await fetch(`http://127.0.0.1:8080/api/auth/${endpoint}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+
+  const data = await response.json()
+
+  if (!response.ok) {
+    throw new Error(data.error || 'An unknown error occurred')
+  }
+
+  return data
+}
+
+// Handle Login
+async function handleLogin() {
   errorMessage.value = ''
   successMessage.value = ''
-
-  // Validate form
-  if (!email.value || !fullName.value) {
-    errorMessage.value = 'Please fill in all fields'
-    return
-  }
-
-  if (!/.+@.+\..+/.test(email.value)) {
-    errorMessage.value = 'Please enter a valid email address'
-    return
-  }
-
   isLoading.value = true
 
   try {
-    // Send login request to backend
-    const response = await fetch('http://127.0.0.1:8080/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email.value,
-        fullName: fullName.value,
-        provider: 'google',
-        timestamp: new Date().toISOString()
-      })
+    const data = await authCall('login', {
+      email: email.value,
+      password: password.value
     })
-
-    if (!response.ok) {
-      throw new Error('Login failed')
-    }
-
-    const data = await response.json()
 
     // Store user info in localStorage
     localStorage.setItem('user', JSON.stringify({
       id: data.id,
-      email: email.value,
-      fullName: fullName.value,
+      email: data.email,
+      fullName: data.fullName,
       loginTime: new Date().toISOString()
     }))
 
-    successMessage.value = `Welcome, ${fullName.value}! Redirecting...`
+    successMessage.value = `Welcome back, ${data.fullName}! Redirecting...`
 
     // Redirect to main app after 1.5 seconds
     setTimeout(() => {
       window.location.href = '/'
     }, 1500)
+
   } catch (error) {
     console.error('Login error:', error)
-    errorMessage.value = 'Login failed. Please try again.'
+    errorMessage.value = error.message || 'Login failed. Please check your credentials.'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+// Handle Register
+async function handleRegister() {
+  errorMessage.value = ''
+  successMessage.value = ''
+  isLoading.value = true
+
+  try {
+    const data = await authCall('register', {
+      email: email.value,
+      password: password.value,
+      fullName: fullName.value
+    })
+
+    successMessage.value = `Account created for ${data.fullName}! Please login now.`
+    // Clear form and switch to login view
+    email.value = ''
+    password.value = ''
+    fullName.value = ''
+    isLogin.value = true
+
+  } catch (error) {
+    console.error('Registration error:', error)
+    errorMessage.value = error.message || 'Registration failed. Please try again.'
   } finally {
     isLoading.value = false
   }
@@ -171,3 +236,4 @@ async function handleGoogleLogin() {
 <style scoped>
 /* Custom styles for login page */
 </style>
+S

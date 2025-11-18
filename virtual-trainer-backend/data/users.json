@@ -46,5 +46,37 @@
     "provider": "google",
     "createdAt": "2025-11-12T09:52:50.273Z",
     "lastLogin": "2025-11-12T09:52:50.273Z"
+  },
+  {
+    "id": "user_1763022330865",
+    "email": "pariskarrr@gmail.com",
+    "fullName": "PARISKAR",
+    "provider": "google",
+    "createdAt": "2025-11-13T08:25:30.865Z",
+    "lastLogin": "2025-11-13T08:25:30.865Z"
+  },
+  {
+    "id": "user_1763110976548",
+    "email": "paris@gmail.com",
+    "fullName": "User",
+    "provider": "local",
+    "createdAt": "2025-11-14T09:02:56.548Z",
+    "lastLogin": "2025-11-14T09:02:56.548Z"
+  },
+  {
+    "id": "user_1763111000160",
+    "email": "hehehaha@gmail.com",
+    "fullName": "User",
+    "provider": "local",
+    "createdAt": "2025-11-14T09:03:20.160Z",
+    "lastLogin": "2025-11-14T09:03:20.160Z"
+  },
+  {
+    "id": "user_1763111782585",
+    "email": "paris5@gmail.com",
+    "fullName": "pariskar rijal",
+    "password": "$2b$10$ghJ.kDqhw5rvCGQpvKtoYuCCBkVo2w.NAikqjuPDMolzPL0cOfMb.",
+    "createdAt": "2025-11-14T09:16:22.585Z",
+    "lastLogin": "2025-11-14T09:16:22.585Z"
   }
 ]

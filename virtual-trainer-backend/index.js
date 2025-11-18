@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import http from 'http';
 import { WebSocketServer } from 'ws';
+import bcrypt from 'bcrypt';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -41,6 +42,7 @@ async function readResults() {
 }
 
 // Helper function to save results
+const saltRounds = 10;
 async function saveResults(results) {
   try {
     await fs.writeFile(resultsFile, JSON.stringify(results, null, 2));
@@ -95,25 +97,34 @@ app.get('/api/exercises/:id', async (req, res) => {
   }
 });
 
-// API endpoint to get all results
-app.get('/api/results', async (req, res) => {
+// API endpoint to get results for a specific user
+app.get('/api/results/:userId', async (req, res) => {
   try {
-    const results = await readResults();
-    res.json(results);
+    const { userId } = req.params;
+    const allResults = await readResults();
+    const userResults = allResults.filter(result => result.userId === userId);
+    res.json(userResults);
   } catch (error) {
-    console.error('Error reading results:', error);
-    res.status(500).json({ error: 'Failed to read results' });
+    console.error('Error reading user results:', error);
+    res.status(500).json({ error: 'Failed to read user results' });
   }
 });
 
 // API endpoint to save session results
 app.post('/api/results', async (req, res) => {
   try {
+    const { userId, ...restOfBody } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required to save results' });
+    }
+
     const results = await readResults();
     const newResult = {
       id: Date.now().toString(),
       timestamp: new Date().toISOString(),
-      ...req.body
+      userId, // Store the user ID
+      ...restOfBody
     };
     results.push(newResult);
     await saveResults(results);
@@ -124,43 +135,80 @@ app.post('/api/results', async (req, res) => {
   }
 });
 
-// API endpoint for user login/registration
-app.post('/api/auth/login', async (req, res) => {
+// API endpoint for user registration
+app.post('/api/auth/register', async (req, res) => {
   try {
-    const { email, fullName, provider } = req.body;
+    const { email, password, fullName } = req.body;
 
-    if (!email || !fullName) {
-      return res.status(400).json({ error: 'Email and fullName are required' });
+    if (!email || !password || !fullName) {
+      return res.status(400).json({ error: 'Email, password, and full name are required' });
     }
 
     const users = await readUsers();
-    let user = users.find(u => u.email === email);
-
-    if (!user) {
-      // Create new user
-      user = {
-        id: 'user_' + Date.now().toString(),
-        email,
-        fullName,
-        provider,
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString()
-      };
-      users.push(user);
-      await saveUsers(users);
-    } else {
-      // Update last login
-      user.lastLogin = new Date().toISOString();
-      await saveUsers(users);
+    if (users.find(u => u.email === email)) {
+      return res.status(409).json({ error: 'User with this email already exists' });
     }
+
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const user = {
+      id: 'user_' + Date.now().toString(),
+      email,
+      fullName,
+      password: hashedPassword,
+      createdAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString()
+    };
+    users.push(user);
+    await saveUsers(users);
 
     res.json({
       success: true,
       id: user.id,
       email: user.email,
       fullName: user.fullName,
-      message: 'Login successful'
+      message: 'Registration successful'
     });
+  } catch (error) {
+    console.error('Error during registration:', error);
+    res.status(500).json({ error: 'Registration failed' });
+  }
+});
+
+// API endpoint for user login
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    const users = await readUsers();
+    const user = users.find(u => u.email === email);
+
+    if (!user || !user.password) { // Check for user and if they have a password (to allow for old/social logins)
+      return res.status(401).json({ error: 'Invalid credentials or password not set' });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+
+    if (match) {
+      // Update last login
+      user.lastLogin = new Date().toISOString();
+      // Note: We are not saving users here to avoid unnecessary file writes on every login.
+      // A more robust system would use a database. For now, we'll rely on the saveUsers in register.
+
+      res.json({
+        success: true,
+        id: user.id,
+        email: user.email,
+        fullName: user.fullName,
+        message: 'Login successful'
+      });
+    } else {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Login failed' });
@@ -263,8 +311,11 @@ wss.on('connection', (ws) => {
               }))
             };
 
-            // Save results
-            saveResults([sessionResult]).catch(err => console.error('Error saving session result:', err));
+            // Save results (Note: WebSocket sessions are currently not user-specific, so we can't easily associate a userId here.
+            // This is a limitation of the current architecture. For now, we'll keep the original save logic for WS sessions,
+            // which saves a session result object that contains participant IDs, but not a single user ID for the whole session.
+            // The user history will rely on the /api/results POST endpoint from the frontend.
+            // saveResults([sessionResult]).catch(err => console.error('Error saving session result:', err));
 
             broadcastToSession(sessionId, {
               type: 'session_ended',
