@@ -377,7 +377,7 @@ const participantId = ref('')
 const currentExerciseName = ref('')
 const sessionActive = ref(false)
 const leaderboard = ref({})
-	const participants = ref([]) // New state for participant list, though leaderboard is sufficient for now
+	const participants = ref([]) 
 
 // Exercise Management
 const exercises = ref([])
@@ -661,7 +661,6 @@ function goHome() {
 // Copy session ID to clipboard
 function copySessionId() {
   navigator.clipboard.writeText(sessionId.value)
-  alert('Session ID copied to clipboard!')
 }
 
 // Load initial list of exercises from the backend

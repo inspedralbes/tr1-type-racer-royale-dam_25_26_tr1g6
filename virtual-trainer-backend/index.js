@@ -311,11 +311,7 @@ wss.on('connection', (ws) => {
               }))
             };
 
-            // Save results (Note: WebSocket sessions are currently not user-specific, so we can't easily associate a userId here.
-            // This is a limitation of the current architecture. For now, we'll keep the original save logic for WS sessions,
-            // which saves a session result object that contains participant IDs, but not a single user ID for the whole session.
-            // The user history will rely on the /api/results POST endpoint from the frontend.
-            // saveResults([sessionResult]).catch(err => console.error('Error saving session result:', err));
+           
 
             broadcastToSession(sessionId, {
               type: 'session_ended',
