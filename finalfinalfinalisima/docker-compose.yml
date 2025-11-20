@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: fittoni_mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: PRG6
+      MYSQL_DATABASE: fittoni_db
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # --- LÍNEA CLAVE AÑADIDA ---
+      # Monta la carpeta con los scripts SQL en el punto de inicialización de MySQL.
+      # Docker ejecutará automáticamente cualquier archivo .sql que encuentre aquí
+      # la primera vez que cree el contenedor.
+      - ./virtual-trainer-backend/db-init:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: fittoni_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

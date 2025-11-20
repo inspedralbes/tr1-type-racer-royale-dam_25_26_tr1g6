@@ -1,0 +1,189 @@
+[
+  {
+    "sessionId": "session_0me6po108",
+    "exercise": "assisted lying leg raise with throw down",
+    "createdAt": "2025-11-13T07:44:29.342Z",
+    "endedAt": "2025-11-13T07:45:43.877Z",
+    "participants": [
+      {
+        "id": "user_d6pnlg8xz",
+        "name": "zax",
+        "reps": 0
+      },
+      {
+        "id": "user_209rl3tdd",
+        "name": "paconi",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_km6n7xpgh",
+    "exercise": "assisted hanging knee raise",
+    "createdAt": "2025-11-13T08:09:31.828Z",
+    "endedAt": "2025-11-13T08:09:41.587Z",
+    "participants": [
+      {
+        "id": "user_oxk93xhrg",
+        "name": "zax",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_5wtbijtbo",
+    "exercise": "barbell bench press",
+    "createdAt": "2025-11-14T07:59:56.067Z",
+    "endedAt": "2025-11-14T08:00:10.883Z",
+    "participants": [
+      {
+        "id": "user_ri0v09ez4",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_5bhgu5vxc",
+    "exercise": "assisted hanging knee raise",
+    "createdAt": "2025-11-14T08:35:55.003Z",
+    "endedAt": "2025-11-14T08:36:18.900Z",
+    "participants": [
+      {
+        "id": "user_bucj1jvty",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_i4c111gbq",
+    "exercise": "45° side bend",
+    "createdAt": "2025-11-16T20:49:59.179Z",
+    "endedAt": "2025-11-16T20:52:33.258Z",
+    "participants": [
+      {
+        "id": "user_3gpfsm76c",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_64tstmgea",
+    "exercise": "barbell decline bench press",
+    "createdAt": "2025-11-16T20:55:45.751Z",
+    "endedAt": "2025-11-16T20:56:12.576Z",
+    "participants": [
+      {
+        "id": "user_uxf02h96k",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_o7tfv7imj",
+    "exercise": "assisted chest dip (kneeling)",
+    "createdAt": "2025-11-16T21:29:46.981Z",
+    "endedAt": "2025-11-16T21:31:15.687Z",
+    "participants": [
+      {
+        "id": "user_zcafv8gos",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_h4s4fja7y",
+    "exercise": "alternate lateral pulldown",
+    "createdAt": "2025-11-16T21:46:37.091Z",
+    "endedAt": "2025-11-16T21:47:26.131Z",
+    "participants": [
+      {
+        "id": "user_5ajftbd63",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_9lhsx4t7b",
+    "exercise": "alternate lateral pulldown",
+    "createdAt": "2025-11-16T21:58:08.004Z",
+    "endedAt": "2025-11-16T21:59:23.285Z",
+    "participants": [
+      {
+        "id": "user_r9xdqv9i7",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_y7k14cqg5",
+    "exercise": "alternate lateral pulldown",
+    "createdAt": "2025-11-16T22:15:53.677Z",
+    "endedAt": "2025-11-16T22:19:54.342Z",
+    "participants": [
+      {
+        "id": "user_5b3lcmh72",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_l63228d3q",
+    "exercise": "alternate lateral pulldown",
+    "createdAt": "2025-11-16T22:29:17.225Z",
+    "endedAt": "2025-11-16T22:31:37.012Z",
+    "participants": [
+      {
+        "id": "user_8rhpeoqu7",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_me2ncha0t",
+    "exercise": "alternate lateral pulldown",
+    "createdAt": "2025-11-16T22:34:25.890Z",
+    "endedAt": "2025-11-16T22:35:05.139Z",
+    "participants": [
+      {
+        "id": "user_ygdciuptc",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_qz46bfh4n",
+    "exercise": "alternate lateral pulldown",
+    "createdAt": "2025-11-17T11:23:18.221Z",
+    "endedAt": "2025-11-17T11:26:11.824Z",
+    "participants": [
+      {
+        "id": "user_egofdh89d",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  },
+  {
+    "sessionId": "session_ee26rpy0i",
+    "exercise": "assisted chest dip (kneeling)",
+    "createdAt": "2025-11-17T11:26:51.838Z",
+    "endedAt": "2025-11-17T11:27:58.307Z",
+    "participants": [
+      {
+        "id": "user_qvu3j97c2",
+        "name": "javier",
+        "reps": 0
+      }
+    ]
+  }
+]

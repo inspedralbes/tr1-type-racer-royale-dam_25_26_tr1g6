@@ -1,0 +1,23 @@
+{
+  "name": "virtual-trainer-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "mysql2": "^3.15.3",
+    "python3": "^0.0.1",
+    "ws": "^8.18.3",
+    "yt-dlp-exec": "^1.0.2"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.93.3"
+  }
+}
